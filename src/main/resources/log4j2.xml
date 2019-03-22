@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorinterval="30" status="info" strict="true">
+
+    <Properties>
+        <Property name="LOG_PATTERN">[%d{yyyy-MM-dd 'T'HH:mm:ss}] - %m%n</Property>
+        <Property name="LOG_ROOT">${sys:catalina.home}/logs/cash_machine</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Appender type="Console" name="Console">
+            <Layout type="PatternLayout" pattern="${LOG_PATTERN}"/>
+        </Appender>
+
+        <Appender type="File" name="File" fileName="${LOG_ROOT}/log.txt">
+            <Layout type="PatternLayout" pattern="${LOG_PATTERN}"/>
+        </Appender>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Logger name="com.training.model.dao.connection.ConnectionPool" level="error" additivity="false">
+            <AppenderRef ref="File"/>
+        </Logger>
+
+        <Logger name="com.training.model.dao.AbstractDAO" level="info" additivity="false">
+            <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="com.training.controller.Controller" level="info" additivity="false">
+            <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="com.training.service.impl.ProductService" level="info" additivity="false">
+            <AppenderRef ref="File"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Root level="error">
+            <AppenderRef ref="Console"/>
+        </Root>
+
+    </Loggers>
+
+</Configuration>
