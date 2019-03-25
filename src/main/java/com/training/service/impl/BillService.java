@@ -8,6 +8,7 @@ import com.training.util.constants.DAOKey;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class BillService implements Service {
@@ -24,11 +25,17 @@ public class BillService implements Service {
         return billDAO.getAll();
     }
 
-    public Integer createNewBill(String date, Integer idUser, Integer idBillStatus ) {
+    public List<Bill> getBillsByUser(Integer idUser) {
+        return billDAO.getBillsByUser(idUser);
+    }
+
+    public Integer createNewBill(LocalDate date, Integer idUser, Integer idBillStatus ) {
         Bill bill = new Bill();
         bill.setDate(date);
         bill.setIdUser(idUser);
         bill.setIdBillStatus(idBillStatus);
         return billDAO.createBillAndGetId(bill);
     }
+
+
 }

@@ -73,6 +73,7 @@ public class ProductDAO extends AbstractDAO<Product> {
             st.setDouble(3, product.getCost());
             st.setInt(4, product.getQuantity());
             st.setInt(5, product.getId());
+            System.out.println(st);
             st.execute();
             conn.commit();
         } catch (SQLException ex) {

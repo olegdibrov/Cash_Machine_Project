@@ -4,10 +4,7 @@ import com.training.model.dao.AbstractDAO;
 import com.training.model.entity.Bill;
 import com.training.model.entity.Payment;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +16,7 @@ public class BillDAO extends AbstractDAO<Bill> {
     @Override
     public void create(Bill bill) {
         try (PreparedStatement st = conn.prepareStatement("INSERT INTO bill (date, id_user, id_bill_status) VALUES (?, ?, ?)")) {
-            st.setString(1, bill.getDate());
+            st.setDate(1, Date.valueOf(bill.getDate()));
             st.setInt(2, bill.getIdUser());
             st.setInt(3, bill.getIdBillStatus());
             System.out.println(st);
@@ -49,7 +46,7 @@ public class BillDAO extends AbstractDAO<Bill> {
                         " SET id_bill = ?, date = ?,  id_bill_statys = ?" +
                         " WHERE id_bill = ?")) {
             st.setInt(1, bill.getIdBill());
-            st.setString(2, bill.getDate());
+            st.setDate(2, Date.valueOf(bill.getDate()));
             st.setInt(3, bill.getIdBillStatus());
             st.setInt(4, bill.getIdBill());
 
@@ -121,6 +118,21 @@ public class BillDAO extends AbstractDAO<Bill> {
 
     }
 
+    public List<Bill> getBillsByUser(Integer idUser) {
+        List<Bill> bills = new ArrayList<>();
+
+        try (PreparedStatement st = conn.prepareStatement("SELECT * FROM bill WHERE id_user = ?")) {
+            st.setInt(1, idUser);
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next()) {
+                bills.add(createBill(resultSet));
+            }
+        } catch (SQLException exc) {
+            logger.error(exc.getMessage(), exc);
+        }
+        return bills;
+    }
+
     /**
      * creates entity
      *
@@ -129,7 +141,7 @@ public class BillDAO extends AbstractDAO<Bill> {
      */
     private Bill createBill(ResultSet resultSet) throws SQLException {
         return new Bill(resultSet.getInt("id_bill"),
-                resultSet.getString("date"),
+                resultSet.getDate("date").toLocalDate(),
                 resultSet.getInt("id_user"),
                 resultSet.getInt("id_bill_status"),
                 new ArrayList<Payment>());

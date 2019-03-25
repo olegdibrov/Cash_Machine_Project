@@ -49,14 +49,23 @@ public class ViewLoginPage implements Command {
         if (isValid) {
             req.getSession().setAttribute("user", user);
 
-            if (user.getRole() == 1) {
-                resp.sendRedirect(CommandManager.getRedirect(CommandKey.COMMAND_VIEW_ADMIN_PAGE.toString()));
-            } else {
-                resp.sendRedirect(CommandManager.getRedirect(CommandKey.COMMAND_VIEW_HOME_PAGE.toString()));
+            switch (user.getRole()) {
+                case 1:
+                    resp.sendRedirect(CommandManager.getRedirect(CommandKey.COMMAND_VIEW_ADMIN_PAGE.toString()));
+                    break;
+                case 2:
+                    resp.sendRedirect(CommandManager.getRedirect(CommandKey.COMMAND_VIEW_HOME_PAGE.toString()));
+                    break;
+                case 3:
+                    resp.sendRedirect(CommandManager.getRedirect(CommandKey.COMMAND_VIEW_HOME_PAGE.toString()));
+                    break;
+                case 4:
+                    resp.sendRedirect(CommandManager.getRedirect(CommandKey.COMMAND_VIEW_STOCK_PAGE.toString()));
+                    break;
+                default:
+                    req.setAttribute("msg", ResourceManager.INSTANCE.getValue("incorrectCredentials"));
+                    req.getRequestDispatcher(PageKey.LOGIN_PAGE.toString()).forward(req, resp);
             }
-        } else {
-            req.setAttribute("msg", ResourceManager.INSTANCE.getValue("incorrectCredentials"));
-            req.getRequestDispatcher(PageKey.LOGIN_PAGE.toString()).forward(req, resp);
         }
     }
 }

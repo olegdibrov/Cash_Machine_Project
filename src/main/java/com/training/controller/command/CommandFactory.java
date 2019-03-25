@@ -25,6 +25,13 @@ public class CommandFactory {
         commands.put(COMMAND_LOGOUT, new Logout());
         commands.put(COMMAND_VIEW_BILL_PAGE, new ViewBillPage());
         commands.put(COMMAND_ADD_PRODUCTS_TO_BILL, new AddProductsToBill());
+        commands.put(COMMAND_UPDATE_PRODUCT_INFO, new UpdateProductInfo());
+        commands.put(COMMAND_VIEW_STOCK_PAGE, new ViewStockPage());
+        commands.put(COMMAND_CREATE_PRODUCT, new CreateProduct());
+        commands.put(COMMAND_VIEW_PRODUCTS_IN_BILL, new ViewProductsInBill());
+        commands.put(COMMAND_CLOSE_BILL, new CloseBill());
+        commands.put(COMMAND_REMOVE_PRODUCT_FROM_BILL, new RemoveProductFromBill());
+        commands.put(COMMAND_OPEN_BILL, new OpenBill());
     }
 
     /**

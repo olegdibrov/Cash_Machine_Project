@@ -20,6 +20,7 @@
     <h1>Bill #${id_bill} </h1>
 </div>
 
+${paymentStatus}<br/>
 
 <table>
     <c:forEach items="${products}" var="product">
@@ -36,6 +37,10 @@
         </tr>
     </c:forEach>
 </table>
+<form method="post" action="home?command=view_products_in_bill">
+    <input type="submit" value="View products in bill" style="width:85px"></td>
+</form>
+
 
 </body>
 </html>

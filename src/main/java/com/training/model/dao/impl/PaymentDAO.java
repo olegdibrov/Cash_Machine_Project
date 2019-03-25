@@ -2,6 +2,7 @@ package com.training.model.dao.impl;
 
 import com.training.model.dao.AbstractDAO;
 import com.training.model.entity.Payment;
+import com.training.model.entity.PaymentPreview;
 import com.training.model.entity.Product;
 
 import java.sql.PreparedStatement;
@@ -112,11 +113,46 @@ public class PaymentDAO extends AbstractDAO<Payment> {
         return list;
     }
 
-    public void createPaymentAndChangeQuantity(Payment payment) {
-        create(payment);
+//    public List<PaymentPreview> getListOfPaymentPreview(Integer idBill) {
+//        List<PaymentPreview> paymentPreviews = new ArrayList<>();
+//        try (PreparedStatement st = conn.prepareStatement(
+//                "SELECT * FROM payments WHERE id_bill = ?")) {
+//            st.setInt(1, idBill);
+//            ResultSet resultSet = st.executeQuery();
+//            while (resultSet.next()) {
+//                paymentPreviews.add(createPayment(resultSet));
+//            }
+//
+//            return paymentPreviews
+//        } catch (SQLException exc) {
+//            logger.error(exc);
+//            return paymentPreviews;
+//        }
+//    }
 
-
+    public List<Payment> getListOfPayment(Integer idBill) {
+        List<Payment> payments = new ArrayList<>();
+        try (PreparedStatement st = conn.prepareStatement(
+                "SELECT * FROM payments WHERE id_bill = ?")) {
+            st.setInt(1, idBill);
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next()) {
+                payments.add(createPayment(resultSet));
+            }
+            return payments;
+        } catch (SQLException exc) {
+            logger.error(exc);
+            return payments;
+        }
     }
+
+
+//    private PaymentPreview createPaymentPreview(ResultSet resultSet) throws SQLException {
+//        return new PaymentPreview(resultSet.getInt("id_payments"),
+//                new ProductDAO().read(resultSet.getInt("id_product")),
+//                resultSet.getInt("quantity"));
+//    }
+
 
     /**
      * creates entity
@@ -125,8 +161,8 @@ public class PaymentDAO extends AbstractDAO<Payment> {
      * @return entity
      */
     private Payment createPayment(ResultSet resultSet) throws SQLException {
-        return new Payment(resultSet.getInt("id_bill"),
-                resultSet.getInt("id_payments"),
+        return new Payment(resultSet.getInt("id_payments"),
+                resultSet.getInt("id_bill"),
                 resultSet.getInt("id_product"),
                 resultSet.getInt("quantity"));
     }

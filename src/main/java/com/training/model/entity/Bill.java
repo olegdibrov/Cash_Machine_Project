@@ -1,11 +1,13 @@
 package com.training.model.entity;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 public class Bill {
     private Integer idBill;
-    private String date;
+    private LocalDate date;
     private Integer idUser;
     private Integer idBillStatus;
     private List<Payment> payments;
@@ -13,7 +15,7 @@ public class Bill {
     public Bill() {
     }
 
-    public Bill(Integer idBill, String date, Integer idUser, Integer idBillStatus, List<Payment> payments) {
+    public Bill(Integer idBill, LocalDate date, Integer idUser, Integer idBillStatus, List<Payment> payments) {
         this.idBill = idBill;
         this.date = date;
         this.idUser = idUser;
@@ -29,11 +31,11 @@ public class Bill {
         this.idBill = idBill;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -82,7 +84,7 @@ public class Bill {
     public String toString() {
         return "Bill{" +
                 "idBill=" + idBill +
-                ", date='" + date + '\'' +
+                ", date=" + date +
                 ", idUser=" + idUser +
                 ", idBillStatus=" + idBillStatus +
                 ", payments=" + payments +

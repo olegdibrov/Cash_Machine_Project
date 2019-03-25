@@ -9,7 +9,14 @@ public enum CommandKey {
     COMMAND_LOGOUT("logout"),
     COMMAND_CHANGE_LOCALIZATION("change_localization"),
     COMMAND_VIEW_BILL_PAGE("view_bill_page"),
-    COMMAND_ADD_PRODUCTS_TO_BILL("add_products_to_bill");
+    COMMAND_ADD_PRODUCTS_TO_BILL("add_products_to_bill"),
+    COMMAND_VIEW_STOCK_PAGE("view_stock_page"),
+    COMMAND_UPDATE_PRODUCT_INFO("update_product_info"),
+    COMMAND_VIEW_PRODUCTS_IN_BILL("view_products_in_bill"),
+    COMMAND_CREATE_PRODUCT("create_product"),
+    COMMAND_CLOSE_BILL("close_bill"),
+    COMMAND_OPEN_BILL("open_bill"),
+    COMMAND_REMOVE_PRODUCT_FROM_BILL("remove_product_from_bill");
 
     /**
      * command's key value field

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ViewBillPage implements Command {
@@ -31,28 +32,25 @@ public class ViewBillPage implements Command {
         if (user != null || (user.getRole() == 1)) {
             if (idBill == null) {
                 String action = req.getParameter("bill");
-                if (action.equalsIgnoreCase("new_bill")) ;
-                {
-                    idBill = billService.createNewBill("now", user.getId(), 1);
-                    if (idBill != null) {
-                        session.setAttribute("products", products);
-                        session.setAttribute("id_bill", idBill);
-                        req.getRequestDispatcher(PageKey.BILL_PAGE.toString()).forward(req, resp);
-                    } else {
-                        req.setAttribute("msg", ResourceManager.INSTANCE.getValue("error"));
-                        req.getRequestDispatcher(PageKey.ERROR_PAGE.toString()).forward(req, resp);
-                    }
 
+                idBill = billService.createNewBill(LocalDate.now(), user.getId(), 1);
+                if (idBill != null) {
+                    session.setAttribute("products", products);
+                    session.setAttribute("id_bill", idBill);
+                    req.getRequestDispatcher(PageKey.BILL_PAGE.toString()).forward(req, resp);
+                } else {
+                    req.setAttribute("msg", ResourceManager.INSTANCE.getValue("error"));
+                    req.getRequestDispatcher(PageKey.ERROR_PAGE.toString()).forward(req, resp);
                 }
+
             } else {
+                session.setAttribute("products", products);
                 req.getRequestDispatcher(PageKey.BILL_PAGE.toString()).forward(req, resp);
 
             }
-
         } else {
             req.getRequestDispatcher(PageKey.HOME_PAGE.toString()).forward(req, resp);
 
         }
-
     }
 }
