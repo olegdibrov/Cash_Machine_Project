@@ -31,10 +31,13 @@ public class PaymentService implements Service {
         paymentDAO.getAll();
     }
 
-    public boolean removeProductFromBill(Integer idPayment) {
+    public synchronized boolean removeProductFromBill(Integer idPayment) {
         Payment payment = paymentDAO.read(idPayment);
         if (payment != null) {
             paymentDAO.delete(payment);
+            Product product = productDAO.read(payment.getIdProduct());
+            product.setQuantity(product.getQuantity() + payment.getQuantity());
+            productDAO.update(product);
             return true;
 
         } else return false;
