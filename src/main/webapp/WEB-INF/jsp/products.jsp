@@ -20,18 +20,18 @@ ${paymentStatus}<br/>
                 <td>${product.product.name}</td>
                 <td>${product.product.cost}</td>
                 <td><input type="hidden" name="id_payment" value="${product.idPayment}"></td>
-                <c:if test="${user.id != 3}">
+                <c:if test="${user.id == 3}">
                     <td><input type="submit" value="remove"></td>
                 </c:if>
             </form>
         </tr>
     </c:forEach>
 </table>
-
+<c:if test="${user.id == 3}">
 <form method="post" action="home?command=cancel_bill">
     <input type="submit" value="Cancel bill">
 </form>
-
+</c:if>
 <form method="post" action="home?command=view_bill_page">
     <input type="submit" value="Back">
 </form>

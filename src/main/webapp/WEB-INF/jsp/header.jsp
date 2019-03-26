@@ -29,9 +29,7 @@
         <div align="left">
             <c:choose>
                 <c:when test="${empty user}">
-
                     <li><a href="home?command=view_login_page">${loginLoc}</a></li>
-                    <li><a href="home?command=view_registration_page">${registrationLoc}</a></li>
                 </c:when>
                 <c:otherwise>
                     <li>${greetingLoc}, ${user.login}! (<a href="home?command=logout">${logoutLoc}</a>)</li>

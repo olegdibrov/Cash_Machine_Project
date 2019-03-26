@@ -32,6 +32,7 @@ public class CommandFactory {
         commands.put(COMMAND_CLOSE_BILL, new CloseBill());
         commands.put(COMMAND_REMOVE_PRODUCT_FROM_BILL, new RemoveProductFromBill());
         commands.put(COMMAND_OPEN_BILL, new OpenBill());
+        commands.put(COMMAND_CANCEL_BILL, new CancelBill());
     }
 
     /**

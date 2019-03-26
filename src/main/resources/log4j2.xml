@@ -3,7 +3,7 @@
 
     <Properties>
         <Property name="LOG_PATTERN">[%d{yyyy-MM-dd 'T'HH:mm:ss}] - %m%n</Property>
-        <Property name="LOG_ROOT">${sys:catalina.home}/logs/cash_machine</Property>
+        <Property name="LOG_ROOT">C:\cash_machine_log</Property>
     </Properties>
 
     <Appenders>

@@ -58,7 +58,19 @@ public class UserDAO extends AbstractDAO<User> {
      * {@inheritDoc}
      */
     @Override
-    public void update(User entity) {
+    public void update(User user) {
+        try (PreparedStatement st = conn.prepareStatement(
+                "UPDATE users" +
+                        " SET user_login = ?, user_password = ?, id_users_roles = ?" +
+                        " WHERE id_user = ?")) {
+            st.setString(1, user.getLogin());
+            st.setString(2, user.getPassword());
+            st.setInt(3, user.getRole());
+            st.setInt(4, user.getId());
+            st.execute();
+        } catch (SQLException exc) {
+            logger.error(exc.getMessage(), exc);
+        }
 
     }
 
@@ -66,7 +78,14 @@ public class UserDAO extends AbstractDAO<User> {
      * {@inheritDoc}
      */
     @Override
-    public void delete(User entity) {
+    public void delete(User user) {
+        try (PreparedStatement st = conn.prepareStatement(
+                "DELETE FROM users WHERE id_user = ?")) {
+            st.setInt(1, user.getId());
+            st.execute();
+        } catch (SQLException exc) {
+            logger.error(exc.getMessage(), exc);
+        }
 
     }
 

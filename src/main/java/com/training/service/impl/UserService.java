@@ -60,11 +60,11 @@ public class UserService implements Service {
      * @param login user login
      * @param pass  user password
      */
-    public void createUser(String login, String pass) {
+    public void createUser(String login, String pass, Integer role) {
         User user = new User();
         user.setLogin(login);
         user.setPassword(bpe.encryptPassword(pass));
-        user.setRole(2);
+        user.setRole(role);
         userDAO.create(user);
     }
 

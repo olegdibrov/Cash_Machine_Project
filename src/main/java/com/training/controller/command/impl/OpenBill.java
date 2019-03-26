@@ -28,7 +28,6 @@ public class OpenBill implements Command {
         User user = (User) session.getAttribute("user");
         List<Bill> bills = new ArrayList<>();
         Pagination paginator;
-        // = Pagination.getPaginator(showTimeService.getAll(), 10);
         if (user != null) {
             if (req.getParameter("id_bill") == null) {
                 if (user.getRole() == 2) {

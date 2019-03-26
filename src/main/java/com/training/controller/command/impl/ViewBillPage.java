@@ -6,6 +6,7 @@ import com.training.model.entity.User;
 import com.training.service.ServiceFactory;
 import com.training.service.impl.BillService;
 import com.training.service.impl.ProductService;
+import com.training.util.Pagination;
 import com.training.util.ResourceManager;
 import com.training.util.constants.PageKey;
 import com.training.util.constants.ServiceKey;
@@ -35,7 +36,12 @@ public class ViewBillPage implements Command {
 
                 idBill = billService.createNewBill(LocalDate.now(), user.getId(), 1);
                 if (idBill != null) {
-                    session.setAttribute("products", products);
+                    Pagination paginator = Pagination.getPaginator(products, 10);
+                    req.setAttribute("noOfPages", paginator.getNumberOfPages());
+                    req.setAttribute("currentPage", paginator.getCurrentPage(req.getParameter("page")));
+                    req.setAttribute("products", paginator.paginate());
+
+                    //session.setAttribute("products", products);
                     session.setAttribute("id_bill", idBill);
                     req.getRequestDispatcher(PageKey.BILL_PAGE.toString()).forward(req, resp);
                 } else {
@@ -44,7 +50,11 @@ public class ViewBillPage implements Command {
                 }
 
             } else {
-                session.setAttribute("products", products);
+                Pagination paginator = Pagination.getPaginator(products, 10);
+                req.setAttribute("noOfPages", paginator.getNumberOfPages());
+                req.setAttribute("currentPage", paginator.getCurrentPage(req.getParameter("page")));
+                req.setAttribute("products", paginator.paginate());
+                //session.setAttribute("products", products);
                 req.getRequestDispatcher(PageKey.BILL_PAGE.toString()).forward(req, resp);
 
             }

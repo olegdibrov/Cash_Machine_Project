@@ -16,6 +16,7 @@ public enum CommandKey {
     COMMAND_CREATE_PRODUCT("create_product"),
     COMMAND_CLOSE_BILL("close_bill"),
     COMMAND_OPEN_BILL("open_bill"),
+    COMMAND_CANCEL_BILL("cancel_bill"),
     COMMAND_REMOVE_PRODUCT_FROM_BILL("remove_product_from_bill");
 
     /**

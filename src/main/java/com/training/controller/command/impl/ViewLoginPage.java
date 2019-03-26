@@ -51,7 +51,7 @@ public class ViewLoginPage implements Command {
 
             switch (user.getRole()) {
                 case 1:
-                    resp.sendRedirect(CommandManager.getRedirect(CommandKey.COMMAND_VIEW_ADMIN_PAGE.toString()));
+                    req.getRequestDispatcher(PageKey.ADMIN_PAGE.toString()).forward(req, resp);
                     break;
                 case 2:
                     resp.sendRedirect(CommandManager.getRedirect(CommandKey.COMMAND_VIEW_HOME_PAGE.toString()));
@@ -66,6 +66,10 @@ public class ViewLoginPage implements Command {
                     req.setAttribute("msg", ResourceManager.INSTANCE.getValue("incorrectCredentials"));
                     req.getRequestDispatcher(PageKey.LOGIN_PAGE.toString()).forward(req, resp);
             }
+        } else {
+            req.setAttribute("msg", ResourceManager.INSTANCE.getValue("incorrectCredentials"));
+            req.getRequestDispatcher(PageKey.LOGIN_PAGE.toString()).forward(req, resp);
         }
+
     }
 }

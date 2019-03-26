@@ -32,7 +32,17 @@ public class BillDAO extends AbstractDAO<Bill> {
      */
     @Override
     public Bill read(Integer id) {
-        throw new UnsupportedOperationException();
+        try (PreparedStatement st = conn.prepareStatement(
+                "SELECT * FROM bill WHERE id_bill = ?")) {
+            st.setInt(1, id);
+            ResultSet resultSet = st.executeQuery();
+            if (resultSet.next()) {
+                return createBill(resultSet);
+            }
+        } catch (SQLException exc) {
+            logger.error(exc.getMessage(), exc);
+        }
+        return null;
     }
 
 
@@ -43,7 +53,7 @@ public class BillDAO extends AbstractDAO<Bill> {
     public void update(Bill bill) {
         try (PreparedStatement st = conn.prepareStatement(
                 "UPDATE bill" +
-                        " SET id_bill = ?, date = ?,  id_bill_statys = ?" +
+                        " SET id_bill = ?, date = ?,  id_bill_status = ?" +
                         " WHERE id_bill = ?")) {
             st.setInt(1, bill.getIdBill());
             st.setDate(2, Date.valueOf(bill.getDate()));
@@ -62,7 +72,7 @@ public class BillDAO extends AbstractDAO<Bill> {
      */
     @Override
     public void delete(Bill entity) {
-
+        throw new UnsupportedOperationException();
     }
 
     /**

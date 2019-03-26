@@ -41,14 +41,16 @@ public class ViewRegistrationPage implements Command {
         String login = req.getParameter("Login");
         String pass = req.getParameter("Password");
         String passRep = req.getParameter("Re-Password");
+        String role = req.getParameter("role");
 
         boolean isValid = userService.validateLoginInput(login) &&
                 userService.validatePasswordInput(pass, passRep) &&
-                userService.getUser(login) == null;
+                userService.getUser(login) == null && role != null;
 
         if (isValid) {
+            Integer roleId = Integer.parseInt(role);
             System.out.println(isValid);
-            userService.createUser(login, pass);
+            userService.createUser(login, pass, roleId);
             req.setAttribute("msg", ResourceManager.INSTANCE.getValue("registrationSuccess"));
             req.getRequestDispatcher(PageKey.LOGIN_PAGE.toString()).forward(req, resp);
         } else {

@@ -8,6 +8,7 @@
     <fmt:message key="password" var="passwordLoc"/>
     <fmt:message key="repassword" var="repasswordLoc"/>
     <fmt:message key="submit" var="submitLoc"/>
+    <fmt:message key="role" var="role"/>
 </fmt:bundle>
 <html>
 <head>
@@ -45,7 +46,19 @@
                        minlength="5"  maxlength="20"/>
             </td>
         </tr>
+        <tr>
+            <td align="left">
+                ${role}:
+                    <select name="role">
+                        <option disabled>Choose role</option>
+                        <option name = "2" value="2" selected>Cashier</option>
+                        <option name = "3" value="3">Top Cashier</option>
+                        <option name = "4" value="4">Merchandise</option>
+                    </select>
+            </td>
+        </tr>
     </table>
+
     <div class="col-md-4">
         <button type="submit" id="singlebutton" name="singlebutton" class="btn btn-primary">${submitLoc}</button>
     </div>

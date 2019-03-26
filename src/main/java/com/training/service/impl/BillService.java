@@ -18,7 +18,7 @@ public class BillService implements Service {
     private BillDAO billDAO;
 
     public BillService() {
-        this.billDAO = (BillDAO)DAOFactory.getDAO(DAOKey.BILL_DAO);
+        this.billDAO = (BillDAO) DAOFactory.getDAO(DAOKey.BILL_DAO);
     }
 
     public List<Bill> getAllBills() {
@@ -29,12 +29,22 @@ public class BillService implements Service {
         return billDAO.getBillsByUser(idUser);
     }
 
-    public Integer createNewBill(LocalDate date, Integer idUser, Integer idBillStatus ) {
+    public Integer createNewBill(LocalDate date, Integer idUser, Integer idBillStatus) {
         Bill bill = new Bill();
         bill.setDate(date);
         bill.setIdUser(idUser);
         bill.setIdBillStatus(idBillStatus);
         return billDAO.createBillAndGetId(bill);
+    }
+
+    public boolean cancelBill(Integer idBill) {
+        Bill bill = billDAO.read(idBill);
+        if (bill != null) {
+            bill.setIdBillStatus(3);
+            billDAO.update(bill);
+            return true;
+        }
+        return false;
     }
 
 
