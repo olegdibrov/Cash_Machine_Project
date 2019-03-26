@@ -3,7 +3,7 @@ package com.training.model.entity;
 import java.util.Objects;
 
 /**
- * Class describing movie entity
+ * Class describing product entity
  *
  * @author Oleg Dibrov
  */

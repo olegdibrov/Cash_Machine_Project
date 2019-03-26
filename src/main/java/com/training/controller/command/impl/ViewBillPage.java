@@ -54,7 +54,6 @@ public class ViewBillPage implements Command {
                 req.setAttribute("noOfPages", paginator.getNumberOfPages());
                 req.setAttribute("currentPage", paginator.getCurrentPage(req.getParameter("page")));
                 req.setAttribute("products", paginator.paginate());
-                //session.setAttribute("products", products);
                 req.getRequestDispatcher(PageKey.BILL_PAGE.toString()).forward(req, resp);
 
             }

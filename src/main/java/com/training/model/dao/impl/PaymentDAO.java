@@ -113,22 +113,6 @@ public class PaymentDAO extends AbstractDAO<Payment> {
         return list;
     }
 
-//    public List<PaymentPreview> getListOfPaymentPreview(Integer idBill) {
-//        List<PaymentPreview> paymentPreviews = new ArrayList<>();
-//        try (PreparedStatement st = conn.prepareStatement(
-//                "SELECT * FROM payments WHERE id_bill = ?")) {
-//            st.setInt(1, idBill);
-//            ResultSet resultSet = st.executeQuery();
-//            while (resultSet.next()) {
-//                paymentPreviews.add(createPayment(resultSet));
-//            }
-//
-//            return paymentPreviews
-//        } catch (SQLException exc) {
-//            logger.error(exc);
-//            return paymentPreviews;
-//        }
-//    }
 
     public List<Payment> getListOfPayment(Integer idBill) {
         List<Payment> payments = new ArrayList<>();
@@ -145,13 +129,6 @@ public class PaymentDAO extends AbstractDAO<Payment> {
             return payments;
         }
     }
-
-
-//    private PaymentPreview createPaymentPreview(ResultSet resultSet) throws SQLException {
-//        return new PaymentPreview(resultSet.getInt("id_payments"),
-//                new ProductDAO().read(resultSet.getInt("id_product")),
-//                resultSet.getInt("quantity"));
-//    }
 
 
     /**

@@ -35,13 +35,11 @@ public class OpenBill implements Command {
                     req.setAttribute("noOfPages", paginator.getNumberOfPages());
                     req.setAttribute("currentPage", paginator.getCurrentPage(req.getParameter("page")));
                     req.setAttribute("bills", paginator.paginate());
-                    // bills = billService.getBillsByUser(user.getId());
                 } else if (user.getRole() == 3) {
                     paginator = Pagination.getPaginator(billService.getAllBills(), 10);
                     req.setAttribute("noOfPages", paginator.getNumberOfPages());
                     req.setAttribute("currentPage", paginator.getCurrentPage(req.getParameter("page")));
                     req.setAttribute("bills", paginator.paginate());
-                    // bills = billService.getAllBills();
                 }
                 req.getRequestDispatcher(PageKey.CHOOSE_BILL.toString()).forward(req, resp);
             } else {
@@ -51,12 +49,6 @@ public class OpenBill implements Command {
 
             }
         }
-//        req.setAttribute("noOfPages", paginator.getNumberOfPages());
-//        req.setAttribute("currentPage", paginator.getCurrentPage(req.getParameter("page")));
-//        req.setAttribute("showTimes", paginator.paginate());
-        //session.setAttribute("bills", bills);
-  //      req.getRequestDispatcher(PageKey.CHOOSE_BILL.toString()).forward(req, resp);
-
     }
 
 }

@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 
 /**
@@ -33,15 +34,15 @@ public class ConnectionPool {
         if (dataSource == null) {
             synchronized (ConnectionPool.class) {
                 if (dataSource == null) {
-                    System.out.println("TRYYYYY");
                     BasicDataSource ds = new BasicDataSource();
-                    ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-                    ds.setUrl("jdbc:mysql://localhost:3306/cash_machine_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
-                    ds.setUsername("root");
-                    ds.setPassword("password");
-                    ds.setMinIdle(5);
-                    ds.setMaxIdle(10);
-                    ds.setMaxOpenPreparedStatements(100);
+                    ResourceBundle resource = ResourceBundle.getBundle("database");
+                    ds.setDriverClassName(resource.getString("driver"));
+                    ds.setUrl(resource.getString("url"));
+                    ds.setUsername(resource.getString("user"));
+                    ds.setPassword(resource.getString("password"));
+                    ds.setMinIdle(Integer.valueOf(resource.getString("min")));
+                    ds.setMaxIdle(Integer.valueOf(resource.getString("max")));
+                    ds.setMaxOpenPreparedStatements(Integer.valueOf(resource.getString("statements")));
                     dataSource = ds;
                 }
             }

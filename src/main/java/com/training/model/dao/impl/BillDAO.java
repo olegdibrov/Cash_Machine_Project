@@ -25,7 +25,7 @@ public class BillDAO extends AbstractDAO<Bill> {
             logger.error(ex.getMessage(), ex);
         }
     }
-//
+
 
     /**
      * {@inheritDoc}
